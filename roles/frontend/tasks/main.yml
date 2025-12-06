@@ -14,10 +14,11 @@
     src: roboshop.conf
     dest: /etc/nginx/nginx.conf  
 
-- name: Downloading the frontend content
+- name: Downloading {{ component }} content
   ansible.builtin.unarchive:
-    url: "https://stan-robotshop.s3.amazonaws.com/frontend-v3.zip"
-    dest: /usr/share/nginx/html
+    src: "{{ url }}"
+    dest: "{{ app_path }}"
+    remote_src: yes
 
 - name: Starting nginx service
   ansible.builtin.service:
