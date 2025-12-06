@@ -1,0 +1,5 @@
+- name: Roboshop Playbook To Configure {{ component }}
+  hosts: "{{ component }}"
+  become: yes
+  roles:
+    - "{{ component }}"
