@@ -1,0 +1,9 @@
+- name: Configuring {{ component }}
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: nodejs
+
+- name: Configuring hostname for {{ component }}
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: set-hostname
