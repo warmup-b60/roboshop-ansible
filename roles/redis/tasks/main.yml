@@ -1,0 +1,31 @@
+- name: Configuring {{ component }}
+  ansible.builtin.shell: dnf module disable redis -y ; dnf module enable redis:7 -y
+
+- name: Installing {{ component }}
+  ansible.builtin.dnf:
+    name: "{{ component }}"
+    state: present
+
+- name: Making {{ component }} accessible
+  ansible.builtin.replace:
+    path: /etc/redis/redis.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+- name: Making {{ component }} protected mode to false
+  ansible.builtin.replace:
+    path: /etc/redis/redis.conf
+    regexp: 'protected-mode yes'
+    replace: 'protected-mode no'
+    
+- name: Restarting {{ component }} service
+  ansible.builtin.systemd_service:
+    state: restarted
+    daemon_reload: true
+    name: redis
+    enabled: true
+
+- name: Configuring hostname for {{ component }}
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: set-hostname
