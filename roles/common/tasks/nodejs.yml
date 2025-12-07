@@ -1,5 +1,5 @@
 - name: Disabling default nodejs version
-  ansible.builtin.shell: dnf module nodejs nginx -y
+  ansible.builtin.shell: dnf module disable nodejs -y
 
 - name: Enabling nodejs 20 version
   ansible.builtin.shell: dnf module enable nodejs:20 -y
