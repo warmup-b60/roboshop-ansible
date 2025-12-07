@@ -1,0 +1,15 @@
+- name: Clearning old {{ component }} content
+  ansible.builtin.file:
+    path: "{{ app_path }}"
+    state: absent
+
+- name: Creating {{ component }} directoru
+  ansible.builtin.file:
+    path: "{{ app_path }}"
+    state: directory 
+
+- name: Downloading & extracting {{ component }} content
+  ansible.builtin.unarchive:
+    src: "{{ url }}"
+    dest: "{{ app_path }}"
+    remote_src: yes

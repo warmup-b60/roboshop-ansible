@@ -1,0 +1,4 @@
+- name: creating application user
+  ansible.builtin.user:
+    name: {{ app_user }}
+    state: present

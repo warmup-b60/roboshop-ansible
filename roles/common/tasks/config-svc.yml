@@ -1,0 +1,4 @@
+- name: Configuring {{ component }} service
+  ansible.builtin.template:
+    src: systemd.service
+    dest: /etc/systemd/system/{{ component }}.service
