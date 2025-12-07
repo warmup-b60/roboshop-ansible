@@ -5,7 +5,7 @@
 
 - name: Installing {{ component }}
   ansible.builtin.dnf:  
-    name: mrabbitmq-server
+    name: rabbitmq-server
     state: present  
 
 - name: Restarting {{ component }} service
