@@ -1,0 +1,49 @@
+- name: Disabling default nodejs version
+  ansible.builtin.shell: dnf module nodejs nginx -y
+
+- name: Enabling nodejs 20 version
+  ansible.builtin.shell: dnf module enable nodejs:20 -y
+
+- name: Installing Nodejs 
+  ansible.builtin.dnf:  
+    name: nodejs
+    state: present   
+
+- name: creating application user
+  ansible.builtin.user:
+    name: {{ app_user }}
+    state: present
+
+- name: Clearning old {{ component }} content
+  ansible.builtin.file:
+    path: "{{ app_path }}"
+    state: absent
+
+- name: Creating {{ component }} directoru
+  ansible.builtin.file:
+    path: "{{ app_path }}"
+    state: directory 
+
+- name: Downloading & extracting {{ component }} content
+  ansible.builtin.unarchive:
+    src: "{{ url }}"
+    dest: "{{ app_path }}"
+    remote_src: yes
+
+- name: Configuring {{ component }} service
+  ansible.builtin.template:
+    src: systemd.service
+    dest: /etc/systemd/system/{{ component }}.service
+
+- name: Configuring the repo for mongodb shell 
+  ansible.builtin.template:
+    src: mongod.repo
+    dest: "{{ repo_path }}"
+
+- name: Installing mongodb shell
+  ansible.builtin.dnf:  
+    name: mongodb-mongosh
+    state: present  
+
+- name: Injecting schema 
+  ansible.builtin.shell: mongosh --host mongodb-{{ env }}.clouding-app.shop </app/db/master-data.js

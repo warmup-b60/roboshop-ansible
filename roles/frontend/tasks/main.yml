@@ -24,7 +24,7 @@
     path: "{{ app_path }}"
     state: directory
 
-- name: Downloading {{ component }} content
+- name: Downloading & extracting {{ component }} content
   ansible.builtin.unarchive:
     src: "{{ url }}"
     dest: "{{ app_path }}"
