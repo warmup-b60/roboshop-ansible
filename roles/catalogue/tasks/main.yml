@@ -14,4 +14,9 @@
     state: present  
 
 - name: Injecting schema 
-  ansible.builtin.shell: mongosh --host mongodb-{{ env }}.roboshop.internal </app/db/master-data.js
+  ansible.builtin.shell: mongosh --host mongodb-{{ env }}.roboshop.internal </app/db/master-data.js 
+
+- name: Configuring hostname for {{ component }}
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: set-hostname
