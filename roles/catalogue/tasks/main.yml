@@ -14,4 +14,4 @@
     state: present  
 
 - name: Injecting schema 
-  ansible.builtin.shell: mongosh --host mongodb-{{ env }}.clouding-app.shop </app/db/master-data.js
+  ansible.builtin.shell: mongosh --host mongodb-{{ env }}.roboshop.internal </app/db/master-data.js
