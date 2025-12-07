@@ -19,8 +19,12 @@
     name: common
     tasks_from: download-and-extract
 
+- name: Generating node modules
+  ansible.builtin.shell: npm install
+  args:
+    chdir: "{{ app_path }}"
+
 - name: Start service for {{ component }}
   ansible.builtin.include_role:
     name: common
     tasks_from: config-svc 
-    
