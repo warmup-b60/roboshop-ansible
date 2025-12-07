@@ -2,3 +2,13 @@
   ansible.builtin.template:
     src: systemd.service
     dest: /etc/systemd/system/{{ component }}.service
+
+- name: Reloading the systemd daemon
+  ansible.builtin.systemd:
+    daemon_reload: yes
+
+- name: Starting {{ component }} service
+  ansible.builtin.service:
+    name: "{{ component }}"
+    state: restarted
+    enabled: yes
