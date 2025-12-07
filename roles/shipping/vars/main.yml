@@ -1,0 +1,9 @@
+app_user: "roboshop"
+component: "shipping"
+url: "https://stan-robotshop.s3.amazonaws.com/shipping-v3.zip"
+app_path: "/app"
+setup_schema: true
+schema: 
+  - schema
+  - app-user
+  - master-data
