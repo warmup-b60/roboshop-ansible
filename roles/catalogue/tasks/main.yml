@@ -5,7 +5,7 @@
 
 - name: Configuring the repo for mongodb shell 
   ansible.builtin.template:
-    src: mongod.repo
+    src: mongodb.repo
     dest: "{{ repo_path }}"
 
 - name: Installing mongodb shell
