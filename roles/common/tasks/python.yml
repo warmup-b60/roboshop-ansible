@@ -1,0 +1,27 @@
+- name: Installing Python3
+  ansible.builtin.dnf:
+    name: 
+      - python3
+      - gcc
+      - python3-devel
+    state: present
+
+- name: Create app user for {{ component }}
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: create-app-user
+
+- name: Downloading & extracting {{ component }} content
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download-and-extract
+
+- name: Generating artifacts for {{ component }}
+  ansible.builtin.shell: pip3 install -r requirements.txt
+  args:
+    chdir: "{{ app_path }}" 
+
+- name: Start service for {{ component }}
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: config-svc
