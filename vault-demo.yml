@@ -1,0 +1,7 @@
+- name: Hashicorp Vault Demo
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Get value from vault 
+      ansible.builtin.debug: 
+        msg: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=kv/data/demo:mypass token={{ token }} url=http://172.31.67.238:8200') }}"
