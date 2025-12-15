@@ -1,0 +1,21 @@
+- name: Configure Hashicorp repo 
+  ansible.builtin.template:
+    src: hashicorp.repo 
+    dest: /etc/yum.repos.d/hashicorp.repo 
+
+- name: Install Vault
+  ansible.builtin.dnf:
+    name: vault
+    state: present
+
+- name: Configure Vault 
+  ansible.builtin.template:
+    src: vault.hcl 
+    dest: /etc/vault.d/vault.hcl 
+
+- name: Start Vault service
+  ansible.builtin.systemd:
+    name: vault 
+    state: restarted
+    enabled: yes
+    reload: yes
