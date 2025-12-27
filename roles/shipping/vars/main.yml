@@ -8,4 +8,4 @@ schema:
   - app-user
   - master-data
 
-secrets: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{ env }}/data/mysql token={{ token }} url=https://vault-tools.roboshop.internal:8200  validate_certs=False') }}"
+secrets: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{ env }}/data/mysql token={{ token }} url=http://vault-tools.roboshop.internal:8200  validate_certs=False') }}"
