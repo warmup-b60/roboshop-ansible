@@ -5,5 +5,5 @@
 
 - name: Injecting schema 
   loop: "{{ schema }}"
-  ansible.builtin.shell: mysql -h mysql-{{ env }}.roboshop.internal -uroot -pRoboShop@1 < /app/db/{{ item }}.sql
+  ansible.builtin.shell: mysql -h mysql-{{ env }}.roboshop.internal -uroot -p{{ secrets.mysql_pass }} < /app/db/{{ item }}.sql
   when: setup_schema is defined

@@ -18,7 +18,7 @@
 - name: Provisioning RabbitMQ user
   community.rabbitmq.rabbitmq_user:
     user: "{{ app_user }}"
-    password: roboshop123
+    password: "{{ secrets.rabbitmq_pass }}"
     vhost: /
     configure_priv: .*
     read_priv: .*
