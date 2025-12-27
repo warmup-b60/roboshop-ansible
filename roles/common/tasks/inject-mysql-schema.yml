@@ -5,5 +5,5 @@
 
 - name: Injecting schema 
   loop: "{{ schema }}"
-  ansible.builtin.shell: mysql -h mysql-{{ env }}.roboshop.internal -uroot -p{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{ env }}/data/mysql:mysql_pass token={{ token }} url=http://vault-tools.roboshop.internal:8200') }} < /app/db/{{ item }}.sql
+  ansible.builtin.shell: mysql -h mysql-{{ env }}.roboshop.internal -uroot -pRoboShop@1 < /app/db/{{ item }}.sql
   when: setup_schema is defined
