@@ -15,6 +15,12 @@
     name: rabbitmq-server
     enabled: true
 
+- name: Installing vault pre-req package 
+  ansible.builtin.shell: pip3 install hvac
+
+- name: Installing vault pre-req package 
+  ansible.builtin.shell: pip3.11 install hvac
+
 - name: Provisioning RabbitMQ user
   community.rabbitmq.rabbitmq_user:
     user: "{{ app_user }}"

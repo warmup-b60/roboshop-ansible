@@ -3,6 +3,12 @@
     name: mysql-server
     state: present  
 
+- name: Installing vault pre-req package 
+  ansible.builtin.shell: pip3 install hvac
+
+- name: Installing vault pre-req package 
+  ansible.builtin.shell: pip3.11 install hvac
+
 - name: Restarting {{ component }} service
   ansible.builtin.systemd_service:
     state: restarted
