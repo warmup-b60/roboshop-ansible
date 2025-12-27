@@ -3,6 +3,10 @@
     name: mysql-server
     state: present  
 
+- name: Installing {{ component }}
+  ansible.builtin.debug:  
+    msg: This is {{ component }} role
+    
 - name: Installing vault pre-req package 
   ansible.builtin.shell: pip3 install hvac
 
