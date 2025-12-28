@@ -3,7 +3,7 @@
     name: mysql
     state: present
 
-- name: Injecting schema 
+- name: Injecting schema - Master data
   loop: "{{ schema }}"
   ansible.builtin.shell: mysql -h mysql-{{ env }}.roboshop.internal -uroot -pRoboShop@1 < /app/db/{{ item }}.sql
   when: setup_schema is defined
