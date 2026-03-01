@@ -23,6 +23,18 @@
 - name: Configuring root password for {{ component }}
   ansible.builtin.shell: mysql_secure_installation --set-root-pass {{ secrets.mysql_pass }}
 
+# Added only for EKS deployment, can be removed for on-prem deployment
+- name: Download and extract {{ component }} Schema
+  ansible.builtin.unarchive:
+    src: https://stan-robotshop.s3.amazonaws.com/shipping-v3.zip
+    dest: /tmp
+    remote_src: yes
+
+- name: Injecting schema - Master data
+  loop: "{{ schema }}"
+  ansible.builtin.shell: mysql -h mysql-{{ env }}.roboshop.internal -uroot -p{{ secrets.mysql_pass }} < /app/db/{{ item }}.sql
+  when: setup_schema is defined
+
 - name: Configuring hostname for {{ component }}
   ansible.builtin.include_role:
     name: common
