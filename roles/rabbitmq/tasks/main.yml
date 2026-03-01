@@ -16,7 +16,7 @@
     enabled: true
 
 - name: Installing vault pre-req package 
-  ansible.builtin.shell: pip3.11 install hvac
+  ansible.builtin.shell: pip3.11 install hvac && pip install hvac
 
 - name: Provisioning RabbitMQ user for {{ component }}
   community.rabbitmq.rabbitmq_user:
