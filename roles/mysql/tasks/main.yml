@@ -32,7 +32,7 @@
 
 - name: Injecting schema - Master data
   loop: "{{ schema }}"
-  ansible.builtin.shell: mysql -h mysql-{{ env }}.roboshop.internal -uroot -p{{ secrets.mysql_pass }} < /app/db/{{ item }}.sql
+  ansible.builtin.shell: mysql -h mysql-{{ env }}.roboshop.internal -uroot -p{{ secrets.mysql_pass }} < /tmp/db/{{ item }}.sql
   when: setup_schema is defined
 
 - name: Configuring hostname for {{ component }}
