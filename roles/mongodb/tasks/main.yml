@@ -24,7 +24,7 @@
 # Adding only for EKS deployment, can be removed for on-prem deployment
 - name: Download and extract {{ component }} Schema
   ansible.builtin.unarchive:
-    src: https://stan-robotshop.s3.amazonaws.com/shipping-v3.zip
+    src: https://stan-robotshop.s3.amazonaws.com/catalogue-v3.zip
     dest: /tmp
     remote_src: yes
 
