@@ -48,3 +48,11 @@
   ansible.builtin.dnf:
     name: terraform
     state: installed
+
+- name: Install App Packages
+  ansible.builtin.dnf:
+    name:
+      - nodejs
+      - maven
+      - npm
+
